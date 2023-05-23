@@ -1,5 +1,7 @@
 # Matlab H5 Tools
 
+[![View matlab-h5-tools on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://uk.mathworks.com/matlabcentral/fileexchange/129974-matlab-h5-tools)
+
 ## Overview
 
 **Matlab H5 Tools** provides a collection of tools for working with [Hierarchical Data Format version 5 (HDF5) files](https://www.hdfgroup.org/solutions/hdf5/). MATLAB already provides excellent support for HDF5 files with both [high-level and low-level access functions](https://uk.mathworks.com/help/matlab/hdf5-files.html). The primary purpose of this library is to provide additional high-level functions that simplify actions that are currently only supported via the low-level interface.
