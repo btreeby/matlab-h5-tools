@@ -4,7 +4,7 @@
 
 % Copyright (C) 2023- University College London (Bradley Treeby).
 
-classdef (SharedTestFixtures = matlab.unittest.fixtures.PathFixture(getSourceRoot)) ...
+classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRoot)}) ...
     test_copyGroup < matlab.unittest.TestCase
     
     properties
