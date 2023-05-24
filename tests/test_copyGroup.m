@@ -62,6 +62,3 @@ classdef (SharedTestFixtures = matlab.unittest.fixtures.PathFixture(getSourceRoo
     end
 
 end
-function srcRoot = getSourceRoot
-srcRoot = fileparts(fileparts(mfilename("fullpath")));
-end
