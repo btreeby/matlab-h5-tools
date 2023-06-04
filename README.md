@@ -1,6 +1,6 @@
 # Matlab H5 Tools
 
-[![View matlab-h5-tools on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://uk.mathworks.com/matlabcentral/fileexchange/129974-matlab-h5-tools) ![test workflow](https://github.com/btreeby/matlab-h5-tools/actions/workflows/main.yml/badge.svg)
+[![View matlab-h5-tools on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://uk.mathworks.com/matlabcentral/fileexchange/129974-matlab-h5-tools) ![test workflow](https://github.com/btreeby/matlab-h5-tools/actions/workflows/main.yml/badge.svg) [![codecov](https://codecov.io/github/btreeby/matlab-h5-tools/branch/main/graph/badge.svg?token=5RFTK1TVCY)](https://codecov.io/github/btreeby/matlab-h5-tools)
 
 ## Overview
 
