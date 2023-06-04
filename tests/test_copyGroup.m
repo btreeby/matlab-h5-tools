@@ -10,6 +10,7 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
     properties
         fromFile = 'testFrom.h5';
         toFile = 'testTo.h5';
+        textFile = 'textFile.txt';
 
         groupFile1 = 'testGroup1';
         datasetFile1 = 'testDataset1'
@@ -24,7 +25,8 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
     
     methods (TestMethodSetup)
 
-        % Create two HDF5 files, both containing a group with a dataset.
+        % Create two HDF5 files, both containing a group with a dataset,
+        % and a text file.
         function createH5Files(testCase)
             testCase.dataFile1 = rand(testCase.dimsFile1);
             testCase.dataFile2 = rand(testCase.dimsFile2);
@@ -34,6 +36,8 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
 
             h5create(testCase.toFile, ['/' testCase.groupFile2 '/' testCase.datasetFile2], testCase.dimsFile2);
             h5write(testCase.toFile, ['/' testCase.groupFile2 '/' testCase.datasetFile2], testCase.dataFile2);
+
+            writelines("Hello world", testCase.textFile);
         end
 
     end
@@ -44,6 +48,7 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
         function deleteH5Files(testCase)
             delete(testCase.fromFile);
             delete(testCase.toFile);
+            delete(testCase.textFile);
         end
 
     end
@@ -54,9 +59,15 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
         % dataset is correct.
         function testValidInput(testCase)
             h5tools.copyGroup(testCase.fromFile, testCase.toFile, testCase.groupFile1);
-
             dataOut = h5read(testCase.toFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]);
             testCase.verifyEqual(dataOut, testCase.dataFile1);
+        end
+
+        % Copy a dataset with the wrong extension.
+        function testInvalidInput(testCase)
+            testCase.verifyError( ...
+                @() h5tools.copyGroup(testCase.fromFile, testCase.textFile, testCase.groupFile1), ...
+                'h5tools:wrongExtension');
         end
         
     end

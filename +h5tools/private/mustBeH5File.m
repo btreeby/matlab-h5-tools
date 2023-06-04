@@ -16,7 +16,7 @@ function mustBeH5File(filename)
 
 [~, ~, ext] = fileparts(filename);
 if ~strcmp(ext, '.h5')
-    eid = 'Filename:wrongExtension';
+    eid = 'h5tools:wrongExtension';
     msg = 'Filename must have .h5 extension.';
     throwAsCaller(MException(eid, msg));
 end
