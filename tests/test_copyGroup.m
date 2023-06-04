@@ -55,6 +55,15 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
 
     methods(Test)
 
+        % Check groupFile1 and datasetFile1 exist in fromFile, but not
+        % toFile.
+        function testDatasetExists(testCase)
+            testCase.verifyEqual(h5tools.exists(testCase.fromFile, ['/' testCase.groupFile1]), true);
+            testCase.verifyEqual(h5tools.exists(testCase.fromFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]), true);
+            testCase.verifyEqual(h5tools.exists(testCase.toFile, ['/' testCase.groupFile1]), false);
+            testCase.verifyEqual(h5tools.exists(testCase.toFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]), false);
+        end
+
         % Copy a dataset from one file to another, and verify the copied
         % dataset is correct.
         function testValidInput(testCase)
@@ -63,11 +72,18 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
             testCase.verifyEqual(dataOut, testCase.dataFile1);
         end
 
-        % Copy a dataset with the wrong extension.
+        % Try to copy a dataset with the wrong extension.
         function testInvalidInput(testCase)
             testCase.verifyError( ...
                 @() h5tools.copyGroup(testCase.fromFile, testCase.textFile, testCase.groupFile1), ...
                 'h5tools:wrongExtension');
+        end
+
+        % Delete the dataset from the second file, and verify it doesn't
+        % exist after delete.
+        function testDeleteDataset(testCase)
+            h5tools.delete(testCase.toFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]);
+            testCase.verifyEqual(h5tools.exists(testCase.toFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]), false);
         end
         
     end
