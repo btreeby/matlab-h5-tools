@@ -4,7 +4,9 @@
 
 % Copyright (C) 2023- University College London (Bradley Treeby).
 
-classdef test_copyGroup < matlab.unittest.TestCase
+classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRoot)}) ...
+    test_copyGroup < matlab.unittest.TestCase
+    
     properties
         fromFile = 'testFrom.h5';
         toFile = 'testTo.h5';
