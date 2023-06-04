@@ -79,11 +79,17 @@ classdef (SharedTestFixtures = {matlab.unittest.fixtures.PathFixture(getSourceRo
                 'h5tools:wrongExtension');
         end
 
-        % Delete the dataset from the second file, and verify it doesn't
-        % exist after delete.
+        % Delete the dataset, and verify it doesn't exist after delete.
         function testDeleteDataset(testCase)
-            h5tools.delete(testCase.toFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]);
-            testCase.verifyEqual(h5tools.exists(testCase.toFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]), false);
+            h5tools.delete(testCase.fromFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]);
+            testCase.verifyEqual(h5tools.exists(testCase.fromFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]), false);
+        end
+
+        % Try to delete a missing dataset, and verify warning.
+        function testDeleteMissingDataset(testCase)
+            testCase.verifyWarning( ...
+                @() h5tools.delete(testCase.toFile, ['/' testCase.groupFile1 '/' testCase.datasetFile1]), ...
+                'h5tools:locationNotFound');
         end
         
     end

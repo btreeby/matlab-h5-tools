@@ -23,5 +23,6 @@ if h5tools.exists(filename, location)
     H5L.delete(fid, location, 'H5P_DEFAULT');
     H5F.close(fid);
 else
-    warning('Specified location doesn''t exist.');
+    wid = 'h5tools:locationNotFound';
+    warning(wid, 'Specified location doesn''t exist.');
 end
