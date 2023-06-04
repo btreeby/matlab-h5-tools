@@ -16,8 +16,8 @@ function copyGroup(fromFile, toFile, group)
 % Copyright (C) 2023- University College London (Bradley Treeby).
 
 arguments
-    fromFile char {mustBeFile}
-    toFile char {mustBeFile}
+    fromFile char {mustBeFile, mustBeH5File(fromFile)}
+    toFile char {mustBeFile, mustBeH5File(toFile)}
     group char
 end
 
